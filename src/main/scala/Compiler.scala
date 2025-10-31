@@ -86,13 +86,14 @@ object Compiler:
     val cmd = prog.cmd
     val linumToParentsMap = computeAncestors(cmd, None, Map())
 
-    // write map to json file
+    // create JSON string
+    val parentMapStr = new StringBuilder("{\n")
+    val outStrList = linumToParentsMap.map((k, v) => s"  \"${k}\": [${v.mkString(",")}]")
+    parentMapStr ++= outStrList.mkString(",\n")
+    parentMapStr ++= "\n}"
+
     val writer = new PrintWriter(new File(pathString))
-    writer.println("{")
-    var count = 0
-    val outStrList = linumToParentsMap.map((k, v) => s"  \"${k}\": [${v.mkString(",")}]");
-    writer.print(outStrList.mkString(",\n"))
-    writer.println("\n}")
+    writer.println(parentMapStr)
     writer.close()
   }
 
