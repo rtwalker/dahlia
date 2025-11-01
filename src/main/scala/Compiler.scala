@@ -1,16 +1,14 @@
 package fuselang
 
-import scala.util.parsing.input.Position
 import scala.util.Try
-import scala.collection.SortedMap
 import scala.io.Source
-import java.nio.file.{Files, Path, Paths, StandardOpenOption}
 import common.*
 import Configuration.*
 import Syntax.*
 import Transformer.{PartialTransformer, TypedPartialTransformer}
 
 import java.io.{File, PrintWriter}
+import java.nio.file.{Files, Path, Paths, StandardOpenOption}
 
 object Compiler:
 
