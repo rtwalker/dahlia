@@ -2,6 +2,7 @@ package fuselang
 
 import scala.util.parsing.input.Position
 import scala.util.Try
+import scala.collection.SortedMap
 import scala.io.Source
 import java.nio.file.{Files, Path, Paths, StandardOpenOption}
 import common.*
@@ -84,15 +85,15 @@ object Compiler:
 
   def writeParentMap(prog: Prog, pathString: String): Unit = {
     val cmd = prog.cmd
-    val linumToParentsMap = computeAncestors(cmd, None, Map())
+    val linumToParentsMap = computeAncestors(cmd, None, Map()).to(collection.immutable.SortedMap)
 
     // create JSON string
-    val parentMapStr = new StringBuilder("{\n")
+    val parentMapStr = StringBuilder("{\n")
     val outStrList = linumToParentsMap.map((k, v) => s"  \"${k}\": [${v.mkString(",")}]")
     parentMapStr ++= outStrList.mkString(",\n")
     parentMapStr ++= "\n}"
 
-    val writer = new PrintWriter(new File(pathString))
+    val writer = PrintWriter(File(pathString))
     writer.println(parentMapStr)
     writer.close()
   }

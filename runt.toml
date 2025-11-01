@@ -31,7 +31,7 @@ cmd = "./fuse {}"
 name = "parent map"
 paths = [ "file-tests/parent-map/*.fuse" ]
 cmd = """
-./fuse {} --lower -b futil -l error --parent-map {}.tmp_err_file ; cat {}.tmp_err_file 1>&2; rm {}.tmp_err_file
+./fuse {} --lower -b futil -l error --parent-map {}.tmp_err_file | tail -n+2 ; cat {}.tmp_err_file 1>&2; rm {}.tmp_err_file
 """
 
 [[tests]]

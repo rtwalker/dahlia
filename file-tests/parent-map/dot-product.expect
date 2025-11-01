@@ -1,4 +1,3 @@
-// git.status = clean, build.date = Fri Oct 31 18:06:09 EDT 2025, git.hash = ca4fd12
 import "primitives/core.futil";
 import "primitives/memories/seq.futil";
 import "primitives/binary_operators.futil";
