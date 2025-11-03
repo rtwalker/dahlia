@@ -73,6 +73,16 @@ object Compiler:
         val tAdded = computeAncestors(t, currSymbolOpt, currAdded)
         computeAncestors(f, currSymbolOpt, tAdded)
       }
+      case CBlock(cmd) => {
+        computeAncestors(cmd, parentLineOpt, linumToAncestors)
+      }
+      case CLet(_, _, e) => {
+        // add the current entry only if we have an expression (this let gets translated to a Calyx group)
+        e match {
+          case Some(_) => currAdded
+          case None => linumToAncestors
+        }
+      }
       case CEmpty | CView(_,_,_) | CDecorate(_) => {
         // commands that we don't need to record 
         // return the original map unmodified
